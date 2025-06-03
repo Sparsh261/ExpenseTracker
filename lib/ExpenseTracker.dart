@@ -1,24 +1,71 @@
 
+import 'package:expensetracker/NewExpense.dart';
 import 'package:expensetracker/ExpenseList.dart';
 import 'package:expensetracker/Model/Expense.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
-class ExpenseTracker extends StatelessWidget{
+class ExpenseTracker extends StatefulWidget {
+  @override
+  State<ExpenseTracker> createState() {
+    return ExpensetrackerState();
+  }
+}
 
+class ExpensetrackerState extends State<ExpenseTracker> {
   List<Expense> registeredExpenses = [
-    Expense(title : "Meeting", amount : 402 ,date : DateTime.now(), category: Category.Work),
-    Expense(title : "Food", amount : 402 ,date : DateTime.now(), category: Category.Food),
+    Expense(
+      title: 'Flutter',
+      amount: 5.25,
+      date: DateTime.now(),
+      category: Category.Work,
+    ),
+    Expense(
+      title: 'Moive',
+      amount: 10,
+      date: DateTime.now(),
+      category: Category.Leisure,
+    ),
   ];
+
+  void openExpenseAdderOverlay() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => NewExpense(onAddExpense: addExpense),
+    );
+  }
+
+  addExpense(Expense expense) {
+    print(expense);
+    setState(() {
+      registeredExpenses.add(expense);
+    });
+  }
+
+  removeExpense(Expense expense) {
+    registeredExpenses.remove(expense);
+  }
 
   @override
   Widget build(BuildContext context) {
-    
-    return(Scaffold(body: Column(
-      children: [
-        Text("ExpenseTracker"),
-        Expanded(child: ExpenseList(expenses : registeredExpenses))
-      ],
-    )));
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('EXPENSE TRACKER'),
+        actions: [
+          IconButton(onPressed: openExpenseAdderOverlay, icon: Icon(Icons.add)),
+        ],
+      ),
+      body: Column(
+        children: [
+          Text('EXPENSE'),
+          Expanded(
+            child: ExpenseList(
+              expenses: registeredExpenses,
+              onRemoveExpense: removeExpense,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
