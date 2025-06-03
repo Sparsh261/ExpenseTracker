@@ -20,12 +20,6 @@ class ExpensetrackerState extends State<ExpenseTracker> {
       date: DateTime.now(),
       category: Category.Work,
     ),
-    Expense(
-      title: 'Moive',
-      amount: 10,
-      date: DateTime.now(),
-      category: Category.Leisure,
-    ),
   ];
 
   void openExpenseAdderOverlay() {
@@ -36,7 +30,6 @@ class ExpensetrackerState extends State<ExpenseTracker> {
   }
 
   addExpense(Expense expense) {
-    print(expense);
     setState(() {
       registeredExpenses.add(expense);
     });
