@@ -1,4 +1,3 @@
-
 import 'package:expensetracker/NewExpense.dart';
 import 'package:expensetracker/ExpenseList.dart';
 import 'package:expensetracker/Model/Expense.dart';
@@ -33,10 +32,28 @@ class ExpensetrackerState extends State<ExpenseTracker> {
     setState(() {
       registeredExpenses.add(expense);
     });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Expense Added"), duration: Duration(seconds: 2)),
+    );
   }
 
   removeExpense(Expense expense) {
-    registeredExpenses.remove(expense);
+    setState(() {
+      registeredExpenses.remove(expense);
+    });
+    ScaffoldMessenger.of(context).clearSnackBars();
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Expense Deleted"),
+      duration: Duration(seconds: 2),
+      action: SnackBarAction(
+        label: "undo", onPressed: (){   
+          setState(() {
+      registeredExpenses.add(expense);
+    });
+        }
+        ))
+    );
   }
 
   @override
@@ -45,7 +62,9 @@ class ExpensetrackerState extends State<ExpenseTracker> {
       appBar: AppBar(
         title: Text('EXPENSE TRACKER'),
         actions: [
-          IconButton(onPressed: openExpenseAdderOverlay, icon: Icon(Icons.add)),
+          IconButton(
+            onPressed: openExpenseAdderOverlay,
+            icon: Icon(Icons.add)),
         ],
       ),
       body: Column(

@@ -15,6 +15,13 @@ class ExpenseList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if(expenses.length == 0){
+       return(
+      Text("NO Expenses", style: TextStyle(color: Colors.red),)
+    );
+    }
+    else{
+
     return(
       ListView.builder( 
       itemCount: expenses.length, 
@@ -27,5 +34,6 @@ class ExpenseList extends StatelessWidget {
           ),
       )
     );
+    }
   }
 }
