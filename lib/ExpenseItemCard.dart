@@ -14,10 +14,31 @@ class ExpenseItemCard extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: Column(
           children: [
-            Text(expense.title),
-            Text("Amount : " + expense.amount.toString()),
-            Text(expense.category.toString()),
-            Text(expense.date.toString()),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(expense.title, style: TextStyle(fontSize: 20, fontWeight: FontWeight.w700, letterSpacing: 2),),
+              ],
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Column(
+                  children: [
+                    Text("Amount : " + expense.amount.toString()),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Text(expense.category.toString()),
+                    Text(expense.date.toString()),
+                  ],
+                ),
+
+              ],
+            ),
+            
           ],
         ),
       )
