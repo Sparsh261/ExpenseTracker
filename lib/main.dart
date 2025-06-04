@@ -4,8 +4,6 @@ import 'ExpenseTracker.dart';
 var kColorScheme = ColorScheme.fromSeed(
   seedColor: Color.fromARGB(133, 241, 180, 8)
 );
-
-
 void main() {
   runApp(MaterialApp(
     theme: ThemeData().copyWith(

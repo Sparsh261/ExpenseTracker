@@ -1,3 +1,4 @@
+import 'package:expensetracker/ExpensePieChart.dart';
 import 'package:expensetracker/NewExpense.dart';
 import 'package:expensetracker/ExpenseList.dart';
 import 'package:expensetracker/Model/Expense.dart';
@@ -18,6 +19,24 @@ class ExpensetrackerState extends State<ExpenseTracker> {
       amount: 5.25,
       date: DateTime.now(),
       category: Category.Work,
+    ),
+    Expense(
+      title: 'Flutter',
+      amount: 15.25,
+      date: DateTime.now(),
+      category: Category.Food,
+    ),
+    Expense(
+      title: 'Flutter',
+      amount: 25.25,
+      date: DateTime.now(),
+      category: Category.Travel,
+    ),
+    Expense(
+      title: 'Flutter',
+      amount: 45.25,
+      date: DateTime.now(),
+      category: Category.Leisure,
     ),
   ];
 
@@ -68,16 +87,20 @@ class ExpensetrackerState extends State<ExpenseTracker> {
         ],
       ),
       body: Column(
-        children: [
-          Text('EXPENSE'),
+          children: [
           Expanded(
-            child: ExpenseList(
-              expenses: registeredExpenses,
-              onRemoveExpense: removeExpense,
-            ),
+            // padding: const EdgeInsets.all(8.0),
+            child: ExpensePieChart(expenses: registeredExpenses),
           ),
-        ],
-      ),
+            Text('EXPENSE'),
+            Expanded(
+              child: ExpenseList(
+                expenses: registeredExpenses,
+                onRemoveExpense: removeExpense,
+              ),
+            ),
+          ],
+        ),
     );
   }
 }
